@@ -13,7 +13,7 @@
 <body>
   <div id="views">
     <div id="tasks">
-      <h1>Todos</h1>
+      <h1>Todos2</h1>
 
       <form data-formfor-todo="controllers.todos.emptyTodo" data-event-submit="controllers.todos.create">
         <input  type="text" placeholder="What needs to be done?" data-bind="todo.body" />
@@ -36,7 +36,7 @@
       
       <footer>
         <a class="clear" data-event-click="Todo.clear">Clear completed</a>
-        <div class="count"><span class="countVal" data-bind="todo.remaining"></span> left</div>
+        <div class="count"><span class="countVal" data-bind="Todo.remaining"></span> left</div>
       </footer>
     </div>
   </div>
@@ -66,9 +66,8 @@ class Example.Todo extends Batman.Model
       if todo.get 'completed'
         todo.destroy() 
   
-  @accessor 'remaining',
-    get: -> (item for item in Todo.all.toArray() when item.get('completed') == false).length
-
+  @classAccessor 'remaining',
+    get: -> Todo.get('all').get('length')
 
 class Example.TodosController extends Batman.Controller
   emptyTodo: null
